@@ -12,38 +12,21 @@ use Songshenzong\Packagist\Packagist;
  */
 class PackagistTest extends TestCase
 {
-    /**
-     * @var string
-     */
-    private $token;
-
-    /**
-     * @var string
-     */
-    private $username;
-
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->token    = getenv('PACKAGIST_TOKEN');
-        $this->username = getenv('PACKAGIST_USERNAME');
-    }
-
     public function testCreatePackage()
     {
         $result = Packagist::createPackage(
-            $this->username,
-            $this->token,
+            getenv('PACKAGIST_USERNAME'),
+            getenv('PACKAGIST_TOKEN'),
             'git@github.com:songshenzong/packagist.git'
         );
         self::assertArrayHasKey('message', $result);
-        self::assertContains('A package with the name', $result['message']['repository']);
+        self::assertNotFalse(strpos($result['message']['repository'], 'A package with the name'));
     }
 
     public function testExists()
     {
-        self::assertTrue(Packagist::exists('songshenzong', 'api'));
         self::assertFalse(Packagist::exists('songshenzong', 'no'));
+        self::assertTrue(Packagist::exists('songshenzong', 'api'));
     }
 
     public function testGetComposerMetadata()
