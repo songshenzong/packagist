@@ -1,0 +1,48 @@
+{
+    "name": "songshenzong/packagist",
+    "description": "A Packagist Client for PHP",
+    "keywords": [
+        "composer",
+        "packagist",
+        "client"
+    ],
+    "license": "MIT",
+    "homepage": "http://songshenzong.com",
+    "support": {
+        "issues": "https://github.com/songshenzong/packagist/issues",
+        "source": "https://github.com/songshenzong/packagist"
+    },
+    "authors": [
+        {
+            "name": "Songshenzong",
+            "email": "i@songshenzong.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "ext-json": "*",
+        "httpx/tea": "^1.0",
+        "songshenzong/command": "^1.0",
+        "danielstjules/stringy": "^3.1"
+    },
+    "require-dev": {
+        "symfony/dotenv": "^3.4",
+        "phpunit/phpunit": "^4.8.35|^5.4.3",
+        "symfony/var-dumper": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Songshenzong\\Packagist\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Songshenzong\\Packagist\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "fixer": "php-cs-fixer fix ./"
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
