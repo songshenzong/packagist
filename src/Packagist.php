@@ -2,9 +2,9 @@
 
 namespace Songshenzong\Packagist;
 
-use HttpX\Tea\Tea;
-use HttpX\Tea\Response;
 use GuzzleHttp\Psr7\Request;
+use HttpX\Tea\Response;
+use HttpX\Tea\Tea;
 
 /**
  * Class Packagist
@@ -36,9 +36,9 @@ class Packagist
         $config = [
             'body' => json_encode([
                                       'repository' => [
-                                          'url' => $repo_url
+                                          'url' => $repo_url,
                                       ],
-                                  ])
+                                  ]),
         ];
 
         $uri = "https://packagist.org/api/create-package?username=$username&apiToken=$token";
@@ -147,9 +147,14 @@ class Packagist
     {
         $packagists = self::listPackagesByOrganization($vendor);
         $list       = array_values($packagists->all());
-        $name       = strtolower($name);
 
-        return in_array("$vendor/$name", $list[0], true);
+        foreach ($list[0] as $item) {
+            if (strtolower($item) === strtolower("$vendor/$name")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
